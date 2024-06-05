@@ -4,7 +4,7 @@ class Home extends Controller
 {
     public function index()
     {
-        // Code...
-        echo $this->view('home');
+        $title = "ShuleMoja School Management System";
+        return $this->view('home', ['title' => $title, 'showNavbar' => true]);
     }
 }

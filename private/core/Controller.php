@@ -5,15 +5,33 @@
  */
 
  class Controller {
-    public function view($view, $data = array())
+    public function view($view, $data = [])
     {
         extract($data);
 
         if(file_exists("../private/views/" . $view . ".view.php"))
         {
-            return file_get_contents("../private/views/" . $view . ".view.php");
+            require("../private/views/" . $view . ".view.php");
         }else {
-            return file_get_contents("../private/views/404.view.php");
+            require("../private/views/404.view.php");
         }
+    }
+
+    public function load_model($model)
+    {
+        if(file_exists("../private/models/" . ucfirst($model) . ".php"))
+        {
+            // Load the file
+            require("../private/models/" . ucfirst($model) . ".php"); 
+            // Instantiate it
+            return $model = new $model();
+        }
+        return false;
+    }
+
+    protected function redirect($url)
+    {
+        header("Location: " . ROOT . "/".trim($url, "/"));
+        die;
     }
  }

@@ -8,8 +8,8 @@
  {
     public function index($id = '')
     {
-        // Code...
-        echo isset($id) && $id != '' ? "Students Controller working for ID ". $id : "Students Controller working!";
+        $title = "Students";
+        return $this->view('students', ['title' => $title, 'showNavbar' => true]);
 
     }
  }
